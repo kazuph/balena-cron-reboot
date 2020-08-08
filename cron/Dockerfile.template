@@ -1,0 +1,10 @@
+FROM balenalib/%%BALENA_MACHINE_NAME%%-alpine
+WORKDIR /app
+
+RUN apk add --no-cache tzdata && \
+    cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+
+COPY reboot.sh /app/
+RUN echo "0 4 * * * /app/reboot.sh" >> /var/spool/cron/crontabs/root
+CMD [ "crond", "-l2", "-f"]
+

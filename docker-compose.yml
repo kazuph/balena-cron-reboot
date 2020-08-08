@@ -1,0 +1,6 @@
+version: '2'
+services:
+  cron:
+    build: ./cron
+    labels:
+      io.balena.features.supervisor-api: 1
